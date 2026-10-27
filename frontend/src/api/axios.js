@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Creates a shared axios instance pointing to our Express backend API
 const api = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "http://localhost:5001/api",
 });
 
 // Automatically attaches the JWT token from localStorage to every outgoing request
