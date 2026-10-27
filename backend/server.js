@@ -20,6 +20,17 @@ app.use(
 );
 app.use(express.json());
 
+// Ensure MongoDB connection is established for every request in serverless environment
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error("DB connection error in middleware:", err);
+    res.status(500).json({ message: `Database connection failed: ${err.message}` });
+  }
+});
+
 // Mount API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/transactions", transactionRoutes);
